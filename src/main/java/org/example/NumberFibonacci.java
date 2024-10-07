@@ -36,12 +36,14 @@ public class NumberFibonacci {
             return n;
         }
 
-        if(fibonacciMemo.containsKey(n)) {
-            return fibonacciMemo.get(n);
+        fibonacciMemo.put(0, 0L);
+        fibonacciMemo.put(1, 1L);
+
+        for (int i = 2; i <= n; i++) {
+            long result = fibonacciMemo.get(i - 1) + fibonacciMemo.get(i - 2);
+            fibonacciMemo.put(i, result);
         }
 
-        long result = calculateByDP(n - 1) + calculateByDP(n - 2);
-        fibonacciMemo.put(n, result);
-        return result;
+        return fibonacciMemo.get(n);
     }
 }
